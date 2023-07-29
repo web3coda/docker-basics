@@ -1,0 +1,13 @@
+# docker-compose.yml with two services: web and redis
+services:
+  # web service builds from Dockerfile in current directory, runs flask app and exposes port 8000
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      # enable debug mode for flask app
+      FLASK_DEBUG: "true"
+  # redis service runs redis:alpine image and exposes port 6379
+  redis:
+    image: "redis:alpine"
