@@ -1,6 +1,10 @@
 import time
 import redis 
 from flask import Flask
+from socket import gethostname
+
+def get_hostname():
+    return gethostname()
 
 app = Flask(__name__)
 # Redis is the hostname of the redis container
@@ -21,4 +25,5 @@ def get_hit_count():
 @app.route('/')
 def hello():
     count = get_hit_count()
-    return 'Hello World! I have been seen {} times.\n'.format(count)
+    hostname = get_hostname()
+    return 'Hello from Docker! I have been seen {} times on host: {}\n'.format(count, hostname)
